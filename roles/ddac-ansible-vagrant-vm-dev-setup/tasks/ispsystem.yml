@@ -23,3 +23,18 @@
     name: ispmanager-lite-common
     state: present
     update_cache: yes
+
+- name: ihttpd listen on all interfaces
+  copy:
+    dest: /usr/local/mgr5/etc/ihttpd.conf
+    content: |
+      listen {
+        ip *
+        redirect
+      }
+
+    owner: root
+    group: root
+    backup: yes
+    mode: 0644
+#  notify: restart ihttpd
