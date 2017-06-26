@@ -17,3 +17,9 @@
   apt_key:
     url: "http://cdn.ispsystem.com/repo/debian/ispsystem.gpg.key"
     state: present
+
+- name: Install ispmanager-lite-common
+  apt:
+    name: ispmanager-lite-common
+    state: present
+    update_cache: yes
