@@ -1,0 +1,16 @@
+---
+
+
+- name: MariaDB repo key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: '0xcbcb082a1bb943db'
+
+- name: Install MariaDB Server
+  apt:
+    name: '{{ item }}'
+    state: present
+    update_cache: yes
+  with_items:
+    - mariadb-server=10.1*
+    - mariadb-client=10.1*

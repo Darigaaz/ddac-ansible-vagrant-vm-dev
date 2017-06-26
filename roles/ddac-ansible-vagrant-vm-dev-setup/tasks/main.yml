@@ -8,3 +8,9 @@
     group: root
     mode: 0644
   with_items: '{{ setup__apt__sources }}'
+
+- name: mysql
+  include: mysql.yml
+
+- name: openssl + nginx
+  include: nginx.yml
