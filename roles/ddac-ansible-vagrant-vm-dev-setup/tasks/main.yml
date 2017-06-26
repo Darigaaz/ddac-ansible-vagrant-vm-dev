@@ -14,3 +14,6 @@
 
 - name: openssl + nginx
   include: nginx.yml
+
+- name: isp
+  include: ispsystem.yml

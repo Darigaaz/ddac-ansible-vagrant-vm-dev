@@ -1,0 +1,19 @@
+---
+
+- name: Add apt sources for ISP
+  copy:
+    dest: '/etc/apt/sources.list.d/{{ item.name }}'
+    content: '{{ item.content }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - name: ispsystem-base.list
+      content: 'deb http://download.ispsystem.com/repo/debian base-jessie main'
+    - name: ispsystem.list
+      content: 'deb http://download.ispsystem.com/repo/debian 5.86-jessie main'
+
+- name: Add apt key for ISP
+  apt_key:
+    url: "http://cdn.ispsystem.com/repo/debian/ispsystem.gpg.key"
+    state: present

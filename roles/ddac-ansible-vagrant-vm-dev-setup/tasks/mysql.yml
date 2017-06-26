@@ -1,5 +1,19 @@
 ---
 
+- name: Add apt sources for MariaDB
+  copy:
+    dest: '/etc/apt/sources.list.d/{{ item.name }}'
+    content: '{{ item.content }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - name: mariadb.list
+      content: |
+        # MariaDB 10.1 repository list - created 2016-10-27 17:02 UTC
+        # http://downloads.mariadb.org/mariadb/repositories/
+        deb [arch=amd64,i386] http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
+        deb-src http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
 
 - name: MariaDB repo key
   apt_key:

@@ -1,13 +1,6 @@
 ---
 
 setup__apt__sources:
-  - name: mariadb.list
-    content: |
-      # MariaDB 10.1 repository list - created 2016-10-27 17:02 UTC
-      # http://downloads.mariadb.org/mariadb/repositories/
-      deb [arch=amd64,i386] http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
-      deb-src http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
-
   - name: jessie-backports.list
     content: |
       # jessie-backports, previously on backports.debian.org
