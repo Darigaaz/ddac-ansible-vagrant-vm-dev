@@ -91,4 +91,26 @@
       limit_cgi=on
       limit_php_mode_cgi=on
       sok=ok
-      {% if "name=dev" in mgrctl__user__result %}clid=dev{% endif %}
+      {% if "name=dev" in mgrctl__user__result.stdout %}clid=dev{% endif %}
+
+- block:
+  - name: Check "dev.localhost"
+    command: /usr/local/mgr5/sbin/mgrctl -m ispmgr webdomain
+    register: mgrctl__webdomain__result
+
+  - name: Create "dev.localhost"
+    command: >
+      /usr/local/mgr5/sbin/mgrctl -m ispmgr
+      webdomain.edit
+      name=dev.localhost
+      home=dev.localhost
+      email=webmaster@dev.localhost
+      ssi=on
+      cgi=on
+      htaccess=on
+      srv_gzip=on
+      foreground=on
+      srv_cache=on
+      expire_times=expire_times_max
+      sok=ok
+      {% if "name=dev.localhost" in mgrctl__webdomain__result.stdout %}clid=dev.localhost{% endif %}
