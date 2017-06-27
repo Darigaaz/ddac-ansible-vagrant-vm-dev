@@ -146,5 +146,5 @@
       owner=dev
       server=MySQL
       sok=ok
-      {% if "name=dev" in mgrctl__db__result.stdout %}elid=dev{% endif %}
+      {% if "name=dev" in mgrctl__db__result.stdout %}elid=dev->MySQL{% endif %}
     when: setup__ispmanager__db__dev__force | bool or "name=dev" not in mgrctl__db__result.stdout

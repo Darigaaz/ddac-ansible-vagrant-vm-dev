@@ -26,5 +26,5 @@
     - name: linux-image-amd64=4.9*
       state: present
       default_release: jessie-backports
-      update_cache: yes
+      # update_cache: yes
     - name: screen
