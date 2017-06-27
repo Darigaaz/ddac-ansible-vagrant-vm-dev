@@ -9,6 +9,11 @@
     mode: 0644
   with_items: '{{ setup__apt__sources }}'
 
+
+- name: Force apt cache update
+  apt:
+    update_cache: yes
+
 - name: Manage packages
   apt:
     state: '{{ item.state | d("present") }}'

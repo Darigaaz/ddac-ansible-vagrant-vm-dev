@@ -109,6 +109,7 @@
       cgi=on
       htaccess=on
       srv_gzip=on
+      gzip_level=5
       foreground=on
       srv_cache=on
       expire_times=expire_times_max
