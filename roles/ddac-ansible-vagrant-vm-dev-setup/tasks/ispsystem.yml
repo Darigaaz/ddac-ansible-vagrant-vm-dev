@@ -132,13 +132,14 @@
 
 - block:
   - name: Check "dev" database
-    command: /usr/local/mgr5/sbin/mgrctl -m db
+    command: /usr/local/mgr5/sbin/mgrctl -m ispmgr db
     register: mgrctl__db__result
     changed_when: False
 
   - name: Create "dev" database and "dev" user
     command: >
-      /usr/local/mgr5/sbin/mgrctl -m db.edit
+      /usr/local/mgr5/sbin/mgrctl -m ispmgr
+      db.edit
       name=dev
       username=dev
       password=dev confirm=dev
