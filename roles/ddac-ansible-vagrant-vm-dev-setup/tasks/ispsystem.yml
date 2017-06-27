@@ -54,3 +54,21 @@
   - name: Add support user
     command: /usr/local/mgr5/sbin/mgrctl -m ispmgr admin.edit name=support passwd=oper confirm=oper super=on sok=ok
     when: '"name=support" not in mgrctl__admin__result.stdout'
+
+- name: Install packages for ISP
+  package:
+    name: '{{ item.name }}'
+    state: '{{ item.state | d(omit) }}'
+  with_items:
+    - name: ispmanager-pkg-afterlogic
+    - name: ispmanager-pkg-bind
+    - name: ispmanager-pkg-dovecot
+    - name: ispmanager-pkg-exim
+    - name: ispmanager-pkg-httpd-itk
+    - name: ispmanager-pkg-logrotate
+    - name: ispmanager-pkg-myadmin
+    - name: ispmanager-pkg-mysql
+    - name: ispmanager-pkg-nginx
+    - name: ispmanager-pkg-php
+    - name: ispmanager-pkg-proftpd
+    - name: ispmanager-pkg-quota
