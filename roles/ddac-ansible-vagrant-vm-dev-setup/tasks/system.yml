@@ -25,7 +25,7 @@
 - name: Add "support" user
   user:
     name: support
-    # shell: /bin/bash
+    shell: /bin/bash
     groups: root
     append: yes
-    password: oper
+    password: $6$5c608dgqz$1mFOLqrTyyyAXM1Z5FaSvPo7jbUlz0jH.HWiA1vYfGONuekjW5GRQ5FoWBovk8pPkEmfJMOYPXVmExI0acN7y.
