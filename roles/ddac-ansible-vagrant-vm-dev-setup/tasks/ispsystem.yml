@@ -37,4 +37,20 @@
     group: root
     backup: yes
     mode: 0644
-#  notify: restart ihttpd
+  notify: restart ihttpd
+
+- name: Allow weak passwords in ISP
+  lineinfile:
+    path: /usr/local/mgr5/etc/ispmgr.conf
+    regexp: '^PWStrength'
+    line: 'PWStrength 0'
+  notify: restart coremanager
+
+- block:
+  - name: Check "support" user
+    command: /usr/local/mgr5/sbin/mgrctl -m ispmgr admin
+    register: mgrctl__admin__result
+
+  - name: Add support user
+    command: /usr/local/mgr5/sbin/mgrctl -m ispmgr admin.edit name=support passwd=oper confirm=oper super=on sok=ok
+    when: '"name=support" not in mgrctl__admin__result.stdout'

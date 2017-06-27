@@ -1,0 +1,9 @@
+---
+
+- name: restart coremanager
+  command: /usr/bin/killall core
+
+- name: restart ihttpd
+  service:
+    name: ihttpd
+    state: restarted
