@@ -18,7 +18,8 @@
   - name:
     command: apt-mark showhold
     register: apt_mark__showhold__result
+    changed_when: False
 
   - name: Hold nginx
     command: apt-mark hold nginx
-    when: '"nginx" in apt_mark__showhold__result.stdout'
+    when: setup__apt_mark__hold__force | bool or "nginx" not in apt_mark__showhold__result.stdout
