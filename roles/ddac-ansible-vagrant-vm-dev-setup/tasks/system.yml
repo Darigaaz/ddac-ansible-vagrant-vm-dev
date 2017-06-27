@@ -9,18 +9,23 @@
     mode: 0644
   with_items: '{{ setup__apt__sources }}'
 
-- name: Install packages
+- name: Manage packages
   apt:
     state: '{{ item.state | d("present") }}'
     name: '{{ item.name }}'
     default_release: '{{ item.default_release | d(omit) }}'
     update_cache: '{{ item.update_cache | d(omit) }}'
+    purge: '{{ item.purge | d(omit) }}'
   with_items:
     - name: linux-image-amd64=4.9*
       state: present
       default_release: jessie-backports
       update_cache: yes
     - name: screen
+    # - name: exim
+    #   state: absent
+    #   purge: yes
+    - name: exim4-daemon-heavy
 
 # - name: Add "support" user
 #   user:

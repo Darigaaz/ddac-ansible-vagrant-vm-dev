@@ -60,10 +60,10 @@
     name: '{{ item.name }}'
     state: '{{ item.state | d(omit) }}'
   with_items:
+    - name: ispmanager-pkg-exim
     - name: ispmanager-pkg-afterlogic
     - name: ispmanager-pkg-bind
     - name: ispmanager-pkg-dovecot
-    - name: ispmanager-pkg-exim
     - name: ispmanager-pkg-httpd-itk
     - name: ispmanager-pkg-logrotate
     - name: ispmanager-pkg-myadmin
