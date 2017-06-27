@@ -91,7 +91,7 @@
       limit_cgi=on
       limit_php_mode_cgi=on
       sok=ok
-      {% if "name=dev" in mgrctl__user__result.stdout %}clid=dev{% endif %}
+      {% if "name=dev" in mgrctl__user__result.stdout %}elid=dev{% endif %}
 
 - block:
   - name: Check "dev.localhost"
@@ -113,4 +113,4 @@
       srv_cache=on
       expire_times=expire_times_max
       sok=ok
-      {% if "name=dev.localhost" in mgrctl__webdomain__result.stdout %}clid=dev.localhost{% endif %}
+      {% if "name=dev.localhost" in mgrctl__webdomain__result.stdout %}elid=dev.localhost{% endif %}
