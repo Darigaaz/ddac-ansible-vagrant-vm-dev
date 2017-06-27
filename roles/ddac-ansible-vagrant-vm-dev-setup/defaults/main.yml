@@ -6,3 +6,10 @@ setup__apt__sources:
       # jessie-backports, previously on backports.debian.org
       deb http://ftp.ru.debian.org/debian/ jessie-backports main contrib non-free
       deb-src http://ftp.ru.debian.org/debian/ jessie-backports main contrib non-free
+
+setup__apt_mark__hold__force: False
+
+setup__ispmanager__db__dev__force: False
+setup__ispmanager__webdoman__dev_localhost__force: False
+setup__ispmanager__user__dev__force: False
+setup__ispmanager__admin__support__force: False
