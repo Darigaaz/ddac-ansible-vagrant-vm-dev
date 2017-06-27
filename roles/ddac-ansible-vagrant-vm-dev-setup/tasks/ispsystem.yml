@@ -47,11 +47,11 @@
   notify: restart coremanager
 
 - block:
-  - name: Check "support" user
+  - name: Check "support" admin
     command: /usr/local/mgr5/sbin/mgrctl -m ispmgr admin
     register: mgrctl__admin__result
 
-  - name: Add support user
+  - name: Add "support" admin
     command: /usr/local/mgr5/sbin/mgrctl -m ispmgr admin.edit name=support passwd=oper confirm=oper super=on sok=ok
     when: '"name=support" not in mgrctl__admin__result.stdout'
 
@@ -60,7 +60,9 @@
     name: '{{ item.name }}'
     state: '{{ item.state | d(omit) }}'
   with_items:
+    - name: exim4-daemon-heavy
     - name: ispmanager-pkg-exim
+
     - name: ispmanager-pkg-afterlogic
     - name: ispmanager-pkg-bind
     - name: ispmanager-pkg-dovecot
@@ -72,3 +74,21 @@
     - name: ispmanager-pkg-php
     - name: ispmanager-pkg-proftpd
     - name: ispmanager-pkg-quota
+
+- block:
+  - name: Check "dev" user
+    command: /usr/local/mgr5/sbin/mgrctl -m ispmgr user
+    register: mgrctl__user__result
+
+  - name: Create "dev" user
+    command: >
+      /usr/local/mgr5/sbin/mgrctl -m ispmgr
+      user.edit
+      name=dev
+      passwd=dev confirm=dev
+      limit_shell=on
+      limit_ssl=on
+      limit_cgi=on
+      limit_php_mode_cgi=on
+      sok=ok
+      {% if "name=dev" in mgrctl__user__result %}clid=dev{% endif %}
