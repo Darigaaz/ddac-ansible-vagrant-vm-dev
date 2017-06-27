@@ -105,7 +105,7 @@
 
 
 - block:
-  - name: Check "dev.localhost"
+  - name: Check "dev.localhost" webdomain
     command: /usr/local/mgr5/sbin/mgrctl -m ispmgr webdomain
     register: mgrctl__webdomain__result
     changed_when: False
@@ -128,3 +128,22 @@
       sok=ok
       {% if "name=dev.localhost" in mgrctl__webdomain__result.stdout %}elid=dev.localhost{% endif %}
     when: setup__ispmanager__webdoman__dev_localhost__force | bool or "name=dev.localhost" not in mgrctl__webdomain__result.stdout
+
+
+- block:
+  - name: Check "dev" database
+    command: /usr/local/mgr5/sbin/mgrctl -m db
+    register: mgrctl__db__result
+    changed_when: False
+
+  - name: Create "dev" database and "dev" user
+    command: >
+      /usr/local/mgr5/sbin/mgrctl -m db.edit
+      name=dev
+      username=dev
+      password=dev confirm=dev
+      owner=dev
+      server=MySQL
+      sok=ok
+      {% if "name=dev" in mgrctl__db__result.stdout %}elid=dev{% endif %}
+    when: setup__ispmanager__db__dev__force | bool or "name=dev" not in mgrctl__db__result.stdout

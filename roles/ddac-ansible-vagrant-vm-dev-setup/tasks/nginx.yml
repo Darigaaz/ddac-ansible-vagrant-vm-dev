@@ -15,7 +15,7 @@
     update_cache: yes
 
 - block:
-  - name:
+  - name: Check apt hold status
     command: apt-mark showhold
     register: apt_mark__showhold__result
     changed_when: False
