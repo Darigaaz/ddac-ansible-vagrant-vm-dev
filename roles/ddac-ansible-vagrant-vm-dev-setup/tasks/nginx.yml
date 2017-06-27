@@ -14,5 +14,11 @@
     default_release: jessie-backports
     update_cache: yes
 
-- name: Hold nginx
-  command: apt-mark hold nginx
+- block:
+  - name:
+    command: apt-mark showhold
+    register: apt_mark__showhold__result
+
+  - name: Hold nginx
+    command: apt-mark hold nginx
+    when: '"nginx" in apt_mark__showhold__result.stdout'
