@@ -1,0 +1,31 @@
+---
+
+- name: Add apt sources
+  copy:
+    dest: '/etc/apt/sources.list.d/{{ item.name }}'
+    content: '{{ item.content }}'
+    owner: root
+    group: root
+    mode: 0644
+  with_items: '{{ setup__apt__sources }}'
+
+- name: Install packages
+  apt:
+    state: '{{ item.state | d("present") }}'
+    name: '{{ item.name }}'
+    default_release: '{{ item.default_release | d(omit) }}'
+    update_cache: '{{ item.update_cache | d(omit) }}'
+  with_items:
+    - name: linux-image-amd64=4.9*
+      state: present
+      default_release: jessie-backports
+      update_cache: yes
+    - name: screen
+
+- name: Add "support" user
+  user:
+    name: support
+    # shell: /bin/bash
+    groups: root
+    append: yes
+    password: oper

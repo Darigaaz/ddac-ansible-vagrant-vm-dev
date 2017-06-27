@@ -1,13 +1,7 @@
 ---
 
-- name: Add apt sources
-  copy:
-    dest: '/etc/apt/sources.list.d/{{ item.name }}'
-    content: '{{ item.content }}'
-    owner: root
-    group: root
-    mode: 0644
-  with_items: '{{ setup__apt__sources }}'
+- name: system
+  include: system.yml
 
 - name: mysql
   include: mysql.yml
