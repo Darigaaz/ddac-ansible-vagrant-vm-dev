@@ -23,8 +23,9 @@
     update_cache: '{{ item.update_cache | d(omit) }}'
     purge: '{{ item.purge | d(omit) }}'
   with_items:
-    - name: linux-image-amd64=4.9*
-      state: present
-      default_release: jessie-backports
-      # update_cache: yes
+    # cant update kernel - vboxadd kernel module will broke
+    # - name: linux-image-amd64=4.9*
+    #   state: present
+    #   default_release: jessie-backports
+    #   # update_cache: yes
     - name: screen
