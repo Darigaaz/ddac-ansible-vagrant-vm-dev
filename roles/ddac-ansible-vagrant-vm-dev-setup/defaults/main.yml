@@ -6,6 +6,14 @@ setup__apt__sources:
       # jessie-backports, previously on backports.debian.org
       deb http://ftp.ru.debian.org/debian/ jessie-backports main contrib non-free
       deb-src http://ftp.ru.debian.org/debian/ jessie-backports main contrib non-free
+    when: '{{ ansible_distribution_major_version | int <= 8 }}'
+  - name: jessie.list
+    content: |
+      # jessie
+      deb http://ftp.ru.debian.org/debian/ jessie main contrib non-free
+      deb-src http://ftp.ru.debian.org/debian/ jessie main contrib non-free
+    when: '{{ ansible_distribution_major_version | int > 8 }}'
+
 
 setup__apt_mark__hold__force: False
 

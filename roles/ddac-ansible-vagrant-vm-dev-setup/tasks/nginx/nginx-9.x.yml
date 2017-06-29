@@ -1,0 +1,13 @@
+---
+
+- name: Install openssl
+  apt:
+    state: present
+    name: openssl
+    update_cache: yes
+
+- name: Install nginx
+  apt:
+    state: present
+    name: nginx
+    update_cache: yes

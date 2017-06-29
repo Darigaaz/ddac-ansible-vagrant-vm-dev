@@ -12,13 +12,21 @@
       content: |
         # MariaDB 10.1 repository list - created 2016-10-27 17:02 UTC
         # http://downloads.mariadb.org/mariadb/repositories/
-        deb [arch=amd64,i386] http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
-        deb-src http://mirror.timeweb.ru/mariadb/repo/10.1/debian jessie main
+        deb [arch=amd64,i386] http://mirror.timeweb.ru/mariadb/repo/10.1/debian {{ ansible_distribution_release }} main
+        deb-src http://mirror.timeweb.ru/mariadb/repo/10.1/debian {{ ansible_distribution_release }} main
 
 - name: MariaDB repo key
   apt_key:
-    keyserver: keyserver.ubuntu.com
-    id: '0xcbcb082a1bb943db'
+    keyserver: '{{ item.keyserver }}'
+    id: '{{ item.id }}'
+  when: item.when | bool
+  with_items:
+    - keyserver: keyserver.ubuntu.com
+      id: '0xcbcb082a1bb943db'
+      when: '{{ ansible_distribution_major_version | int <= 8 }}'
+    - keyserver: keyserver.ubuntu.com
+      id: '0xF1656F24C74CD1D8'
+      when: '{{ ansible_distribution_major_version | int > 8 }}'
 
 - name: Install MariaDB Server
   apt:

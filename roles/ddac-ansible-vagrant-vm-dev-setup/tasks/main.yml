@@ -7,7 +7,12 @@
   include: mysql.yml
 
 - name: openssl + nginx
-  include: nginx.yml
+  include: nginx/nginx-8.x.yml
+  when: ansible_distribution_major_version | int <= 8
+
+- name: openssl + nginx
+  include: nginx/nginx-9.x.yml
+  when: ansible_distribution_major_version | int > 8
 
 - name: isp
   include: ispsystem.yml
